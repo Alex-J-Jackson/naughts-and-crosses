@@ -28,3 +28,17 @@ body {
   width: 100vw;
   height: 100vh;
 }
+
+#new-game {
+  animation: opacity 1s ease-in-out infinite;
+}
+
+@keyframes opacity {
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

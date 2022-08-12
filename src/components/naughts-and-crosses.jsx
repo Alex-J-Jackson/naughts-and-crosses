@@ -36,33 +36,31 @@ const NaughtsAndCrosses = () => {
         const newScore = { ...score };
         newScore[player] += 1;
         setScore(newScore);
+        setCells(new Array(9));
       }
     }
   };
 
-  const checkForDraw = (squares) => {
-    if (!winner && squares.every((square) => square)) {
-      alert("Draw!");
-      setCells(new Array(9));
-    }
-  };
-
   const handleClick = (num) => {
-    if (cells[num]) {
-      alert("Pick another square");
-      return;
+    if (!winner) {
+      if (cells[num] && !cells.every((cell) => cell)) {
+        alert("Square taken");
+        return;
+      } else if (cells[num] && cells.every((cell) => cell)) {
+        alert("Draw!");
+        return handleReset();
+      }
+      const squares = [...cells];
+      if (turn === "X") {
+        squares[num] = "X";
+        setTurn("O");
+      } else {
+        squares[num] = "O";
+        setTurn("X");
+      }
+      setCells(squares);
+      checkForWinner(squares);
     }
-    const squares = [...cells];
-    if (turn === "X") {
-      squares[num] = "X";
-      setTurn("O");
-    } else {
-      squares[num] = "O";
-      setTurn("X");
-    }
-    setCells(squares);
-    checkForWinner(squares);
-    checkForDraw(squares);
   };
 
   const handleReset = () => {
@@ -81,7 +79,11 @@ const NaughtsAndCrosses = () => {
   const OnWin = () => {
     return (
       <button className="ox" onClick={() => handleReset()}>
-        {`X: ${score.X} O: ${score.O}`} New Game
+        <span id="new-game">
+          {`X: ${score.X} | O: ${score.O}`}
+          <br />
+          New Game
+        </span>
       </button>
     );
   };
