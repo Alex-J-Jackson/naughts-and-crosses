@@ -1,3 +1,7 @@
+body {
+  background-color: black;
+}
+
 .App {
   text-align: center;
 }
@@ -35,4 +39,17 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+#grid-toggle {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-family: monospace;
+  font-weight: bold;
+}
+
+#grid-toggle:hover {
+  color: rgb(204, 200, 200);
 }
